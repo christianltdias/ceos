@@ -1,0 +1,189 @@
+:root {
+    --primaryColor: white;
+    --textContBack: white;
+    --backColor: #F1F5F8;
+    --textColor: #0C090A;
+}
+body{
+    background-color: var(--backColor);
+}
+.backdrop {
+    position:fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+.bgc-light {
+    background-color: var(--primaryColor);
+}
+.btn-form-rounded {
+    border-radius: 20px;
+    border-color: white;
+    padding: 10px 25px;
+    color: white;
+    font-size: 1.2rem;
+}
+.btn-form-rounded:hover {
+    color: #5d99c6;
+    background-color: transparent;
+    border-color: white;
+}
+.btn-form-rounded:active {
+  box-shadow: none;
+  background-color: #d9eeff;
+  border-color: #d9eeff;
+}
+.btn-form-rounded:focus {
+  box-shadow: none;
+}
+.form-text-white{
+    color:white;
+}
+.form-title{
+    font-size: 4rem;
+}
+.form-text{
+    font-size: 1.5rem;
+}
+/* ------------ LOGIN -------------- */
+.form-login {
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    top: 20%;
+    bottom: 20%;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    z-index: 2;
+    background-color: white;
+}
+/* -------------------------------------- */
+
+/* ------------ SIGNUP -------------- */
+.form-signup .btn-soc{
+    padding: 10px 0;
+    border: none;
+    background-color: transparent;
+}
+.form-signup .icon-soc{
+    width: 100px;
+    height: 100px;
+}
+.form-signup {
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    top: 20%;
+    bottom: 20%;
+    margin: auto;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    z-index: 2;
+    background-color: white;
+}
+.form-abs {
+    width: 50%;
+    position: relative;
+    left: 25%;
+    overflow: hidden;
+    z-index: 2;
+    background-color: white;
+    margin-top: 10rem;
+    padding: 0 5rem;
+}
+.form-abs .form-item{
+    margin: 1.5rem 0;
+}
+.form-abs .btn-return{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 2.5rem;
+    background-color: #5d99c6;
+    border:none;
+}
+.tm-btn{
+    border:none;
+    background-color: transparent;
+    color: white;
+    font-size: 1.5rem;
+}
+.tm-btn:hover{
+    color: black;
+}
+.tm-btn:active{
+    color: red;
+}
+.act-box{
+    background-color: white;
+    padding: 15px;
+}
+.cat-container {
+    width: 100%;
+    height: 35rem;
+}
+
+.cat-container img{
+    object-fit: cover;
+    width: 100%;
+    height: 15rem;
+}
+
+.cat-container .card-header{
+    background-color: var(--primaryColor);
+    color: var(--textContBack);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.act-box .btn-add{
+    background-color: var(--primaryColor);
+    border: none;
+    padding: 10px 20px;
+    color: var(--textContBack);
+    font-weight: bold;
+}
+.act-box .btn-add:hover{
+    color: black;
+}
+.act-box .btn-add:active{
+    color: red;
+}
+.text-icon{
+    position: relative;
+    right: 10px;
+}
+
+.back-img{
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../../resources/img/background.jpeg");
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 80vh;
+}
+
+.back-img h1{
+    color: var(--textContBack);
+    font-size: 5rem;
+    opacity: 0.8;
+}
+.back-img button{
+    color: var(--textContBack);
+    background-color: transparent;
+    font-size: 2rem;
+    opacity: 0.8;
+    border: 1px solid white;
+    padding: 10px 30px;
+    border-radius: 50px;
+    width: 200px;
+}
