@@ -1,29 +1,23 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-// import logo from './logo.svg';
-import "./App.css";
+import CategoriaService from "../../services/CategoriaService";
+import Categoria from "../../types/ICategoria"
+import "./App.scss";
 
-interface Categoria {
-  id: number;
-  nome: string;
-  descricao: string;
-  urlImagem: string;
-  materias: string[];
-}
+const categoriaService: CategoriaService = new CategoriaService();
 
 const App = () => {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/categorias`).then((res) => {
-      console.log(res.data);
-      const cat: Categoria[] = res.data;
-      setCategorias(cat);
-    });
+    categoriaService
+      .buscaTodasCategorias()
+      .then((res) => setCategorias(categorias.concat(res)));
   }, []);
+
+  
   return (
     <ul>
-      {categorias.map(function (d, idx) {
+      {categorias && categorias.map(function (d, idx) {
         return (
           <li key={idx}>
             {d.id} - {d.nome} - {d.descricao} - {d.urlImagem}

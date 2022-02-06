@@ -1,0 +1,20 @@
+@import "../../index.scss";
+
+.header{
+    background-color: $color-primary;
+    padding: 1rem 0 1rem 2rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+};
+
+.icon{
+    height: 50px;
+    width: 50px;
+    object-fit: fill;
+}
+    
+
+    
+   
