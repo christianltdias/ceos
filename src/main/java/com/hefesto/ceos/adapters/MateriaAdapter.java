@@ -1,13 +1,12 @@
 package com.hefesto.ceos.adapters;
 
+import java.lang.reflect.Type;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.hefesto.ceos.model.Materia;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
 
 public class MateriaAdapter implements JsonSerializer<Materia> {
 

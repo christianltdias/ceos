@@ -1,0 +1,28 @@
+@import "../../../index.scss";
+@import "../../../index.scss";
+
+.btn-fill{
+    background-color: $bg-contrast-primary;
+    border: none;
+}
+
+.btn-fill:hover{
+    background-color: white;
+    color: $bg-contrast-primary;
+}
+
+.btn-border{
+    background-color: transparent;
+    border: 1px solid $bg-contrast-primary;
+    color: $bg-contrast-primary;
+}
+
+.btn-border:hover{
+    border: 1px solid white;
+    color: white;
+}
+
+.btn-base{
+    font-size: 1.2rem;
+    padding: 5px 15px;
+}

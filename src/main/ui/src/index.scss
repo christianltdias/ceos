@@ -1,10 +1,20 @@
-$color-primary: #43bfc4;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
-body {
+$bg-primary: #2d2d31;
+$bg-color-primary: white;
+$bg-contrast-primary: rgb(255, 166, 0);
+$bg-contrast-primary-hv: rgb(255, 201, 102);
+
+$color-primary: #43bfc4;
+$color-text-contrast: white;
+
+$font-global: 'Roboto', sans-serif;
+$font-logo: 'Lobster', cursive;
+
+html, body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: $font-global;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
