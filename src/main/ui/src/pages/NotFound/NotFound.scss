@@ -1,0 +1,13 @@
+@import "../../styles/index.scss";
+
+.not-found-wrapper{
+    background-color: $bg-primary;
+
+    img{
+        height: 15rem;
+    }
+    p{
+        color: white;
+        white-space: nowrap;
+    }
+}

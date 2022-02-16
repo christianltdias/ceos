@@ -1,35 +1,40 @@
-import React, { useState, useEffect } from "react";
-import CategoriaService from "../../services/CategoriaService";
-import Categoria from "../../types/ICategoria"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.scss";
-
-const categoriaService: CategoriaService = new CategoriaService();
+import CategoriasLista from "../../containers/CategoriasLista/CategoriasLista";
+import Login from "../../pages/Login/Login";
+import Header from "../../containers/Header/Header";
+import ProtectedRoute from "../../components/Routes/PrivateRoute/PrivateRoute";
+import { isAuthenticated } from "../../hooks/TokenUtils";
+import Home from "../Home/Home";
+import NotFound from "../NotFound/NotFound";
 
 const App = () => {
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
-
-  useEffect(() => {
-    categoriaService
-      .buscaTodasCategorias()
-      .then((res) => setCategorias(categorias.concat(res)));
-  }, []);
-
-  
   return (
-    <ul>
-      {categorias && categorias.map(function (d, idx) {
-        return (
-          <li key={idx}>
-            {d.id} - {d.nome} - {d.descricao} - {d.urlImagem}
-            <ul>
-              {d.materias.map(function (m) {
-                return <li key={m}>{m}</li>;
-              })}
-            </ul>
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route
+            path="/categorias"
+            element={
+              <ProtectedRoute
+                authenticationPath="/login"
+                isAuthenticated={isAuthenticated()}
+                outlet={
+                  <>
+                    <Header />
+                    <CategoriasLista />
+                  </>
+                }
+              />
+            }
+          />
+
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import "./Header.scss";
 import logo from "../../assets/icons/C.png";
 import { useState } from "react";
-import Button from "../../components/Button/SimpleButton/SimpleButton"
+import Button from "../../components/Button/SimpleButton/SimpleButton";
 
 const Header = () => {
   const logado = true;
@@ -19,20 +19,21 @@ const Header = () => {
   const [selected, setSelected] = useState(0);
 
   const userDetails = () => {
-    if(logado){
+    if (logado) {
       return (
-      <div className="d-flex h-100 justify-content-end align-items-center">
-        <Button fill={false} classExt="rounded">Sign in</Button>
-        <Button fill={true} classExt="mx-3 rounded">Sign up</Button>
-      </div>)
+        <div className="d-flex h-100 justify-content-end align-items-center">
+          <Button fill={false} classExt="rounded">
+            Sign in
+          </Button>
+          <Button fill={true} classExt="mx-3 rounded">
+            Sign up
+          </Button>
+        </div>
+      );
+    } else {
+      return <></>;
     }
-    else {
-      return (
-      <>
-        
-      </>)
-    }
-  }
+  };
 
   return (
     <>
@@ -45,23 +46,21 @@ const Header = () => {
         </div>
         <nav className="nav nav-header col-6 justify-content-center d-flex align-items-center">
           {navItems.map(
-            (item) =>
-              (logado ||
-              logado === item.logado) && (
-                  <a
-                    className={`nav-link ${selected == item.key ? "active" : ""}`}
-                    onClick={() => setSelected(item.key)}
-                    aria-current="page"
-                    href={item.link}
-                  >
-                    {item.text}
-                  </a>
+            (item, idx) =>
+              (logado || logado === item.logado) && (
+                <a
+                  className={`nav-link ${selected == item.key ? "active" : ""}`}
+                  onClick={() => setSelected(item.key)}
+                  aria-current="page"
+                  href={item.link}
+                  key={idx}
+                >
+                  {item.text}
+                </a>
               )
           )}
         </nav>
-        <div className="col-3 user_details">
-          {userDetails()}
-        </div>
+        <div className="col-3 user_details">{userDetails()}</div>
       </div>
     </>
   );

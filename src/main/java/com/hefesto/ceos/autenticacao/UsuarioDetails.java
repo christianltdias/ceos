@@ -25,7 +25,8 @@ public class UsuarioDetails implements UserDetails {
         for (Permissao permissao : permissoes) {
             authorities.add(new SimpleGrantedAuthority("TAREFA_" + permissao.getNome()));
         }
-        return authorities;
+        // return authorities;
+        return null;
     }
 
     @Override

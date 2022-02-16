@@ -1,14 +1,23 @@
 package com.hefesto.ceos.configuration;
 
 import com.hefesto.ceos.autenticacao.UsuarioDetailsService;
+import com.hefesto.ceos.security.AutenticacaoViaTokenFilter;
+import com.hefesto.ceos.security.TokenService;
+import com.hefesto.ceos.service.UsuarioService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -16,6 +25,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UsuarioDetailsService usuarioDetailsService;
+    @Autowired
+    private UsuarioService usuarioService;
+    @Autowired
+    private TokenService tokenService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -29,19 +42,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    @Bean
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/signup/**").permitAll()
-                .anyRequest().permitAll()
-                .and()
-                .formLogin(form -> form
-                        .loginPage("/signin")
-                        .defaultSuccessUrl("/home", true)
-                        .failureUrl("/signin?error=1")
-                        .permitAll())
-                .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/signin"))
-                .cors().and()
-                .csrf().disable()
-                .headers().disable();
+        http
+            .authorizeRequests()
+            .antMatchers("/h2-console/**").permitAll()
+            .antMatchers(HttpMethod.POST,"/api/auth/**").permitAll()
+            .anyRequest().authenticated()
+            .and().csrf().disable()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioService), UsernamePasswordAuthenticationFilter.class)
+            .cors();
     }
 }
