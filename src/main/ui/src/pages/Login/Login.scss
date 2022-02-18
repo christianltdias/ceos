@@ -1,11 +1,21 @@
 @import "../../styles/index.scss";
 
 .login-pg{
-    background-color: $bg-primary;
-
+    background-color: $bg-primary-light;
+    padding: 0 2rem;
     .card{
         width: 40%;
         height: 50%;
     }
 
+}
+
+.login-left-wrapper{
+    // border-right: 1px solid white;
+    height: 100%;
+    color: white;
+   
+    .versao{
+        font-size: 0.75rem;
+    }
 }

@@ -1,7 +1,7 @@
 import "./NotFound.scss"
 import image from "../../assets/images/not_found_orange.png";
 import Button from "../../components/Button/SimpleButton/SimpleButton"
-import {To, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 
 const NotFound = () => {
     const navigate = useNavigate();

@@ -1,22 +1,16 @@
 import { useState } from "react";
+import { getToken } from "../services/Service"
 import Token from '../types/Token';
 
 export default function useToken() {
 
-  const saveToken = (userToken: Token): void => {
+  const saveToken = async (userToken: Token | null): Promise<void> => {
+    if(userToken === null)
+      return sessionStorage.removeItem("token");
+
     sessionStorage.setItem("token", JSON.stringify(userToken));
     setToken(getToken());
   };
-
-  function getToken(): string | null {
-    const tokenString: string | null = sessionStorage.getItem("token");
-    const userToken: Token = JSON.parse(tokenString ? tokenString : "");
-
-    if (userToken?.token && userToken?.tipo)
-      return userToken?.tipo.concat(" ", userToken.token);
-
-    return null;
-  }
 
   function isAuthenticated(): boolean {
     return getToken() != null;

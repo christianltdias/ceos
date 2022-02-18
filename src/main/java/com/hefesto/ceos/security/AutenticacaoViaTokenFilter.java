@@ -7,8 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hefesto.ceos.autenticacao.UsuarioDetails;
 import com.hefesto.ceos.model.Usuario;
 import com.hefesto.ceos.service.UsuarioService;
+import com.hefesto.ceos.utils.UsuarioUtil;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,6 +43,7 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter{
     private void autenticaCliente(String token) {
         Long idUsuario = tokenService.getIdUsuario(token);
         Usuario usuario = usuarioService.getById(idUsuario);
+        UsuarioUtil.getInstance().setUsuarioDetails(new UsuarioDetails(usuario));
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getClasseUsuario().getPermissoes());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
     }

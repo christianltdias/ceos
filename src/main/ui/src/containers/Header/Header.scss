@@ -1,48 +1,67 @@
 @import "../../styles/index.scss";
 
-.header{
-    background-color: $bg-primary;
-    padding: .75rem 2rem .75rem 2rem;
-    margin-bottom: 3rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-};
+.header {
+  background-color: $bg-primary;
+  width: 100%;
+  margin: 0;
+  padding: 0.75rem 2rem 0.75rem 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+  color: white;
 
-.icon{
-    height: 50px;
-    width: 50px;
-    object-fit: fill;
+  a {
+    text-decoration: none;
+  }
 }
 
-.logo_text{
-    flex: 1;
-    font-size: 2.5rem;
-    font-family: $font-logo;
-    color: $bg-color-primary;
-    padding: 0;
-    margin: 0 0 0 1rem;
+.icon {
+  height: 2rem;
+  width: 2rem;
+  object-fit: fill;
 }
 
-.user_details{
-    p{
-        font-size: 1.25rem;
-        color: $bg-contrast-primary;
-    }
+.logo_text {
+  font-size: 1.5rem;
+  font-family: $font-logo;
+  color: $bg-color-primary;
+  padding: 0;
+  margin: 0 0 0 1rem;
 }
 
-.nav-header{
-    a{
-        color: white;
-        font-size: 1.25rem;
-    }
-    a.active{
-        color: $bg-contrast-primary;
-    }
-    a:hover{
-        color: $bg-contrast-primary-hv;
-    }
+.user_details {
+  p {
+    font-size: 1rem;
+    color: $bg-contrast-primary;
+  }
 }
 
-    
-   
+.nav-header {
+  a {
+    color: white;
+    font-size: 1rem;
+  }
+  a.active {
+    color: $bg-contrast-primary;
+  }
+  a:hover {
+    color: $bg-contrast-primary-hv;
+  }
+}
+
+.user_info_wrapper {
+  color: white;
+  padding: 0 20px;
+
+  button {
+    background-color: transparent;
+    color: white;
+    font-size: 1rem;
+    border: none;
+  }
+
+  i {
+    margin-right: 1rem;
+  }
+}
