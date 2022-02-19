@@ -6,14 +6,14 @@ import { useEffect, useState } from "react";
 import { minhasInfo } from "../../services/AutenticacaoService";
 import Token from "../../types/Token";
 import Usuario from "../../types/Usuario";
-import useToken from "../../hooks/tokenHook"
+import useToken from "../../hooks/tokenHook";
 
 interface Props {
   logado: boolean;
   logout: (token: Token | null) => Promise<void>;
 }
 
-const Header = ({logado, logout}: Props) => {
+const Header = ({ logado, logout }: Props) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -31,7 +31,6 @@ const Header = ({logado, logout}: Props) => {
   ];
 
   useEffect(() => {
-    console.log("header")
     if (logado) {
       minhasInfo().then((usuario) => {
         setUsuario(usuario);
@@ -61,15 +60,20 @@ const Header = ({logado, logout}: Props) => {
       );
     } else {
       return (
-        <div className="d-flex h-100 justify-content-end align-items-center">
-          <div className="user_info_wrapper">
-            <button>
-              <i className="bi bi-person-fill"></i>
-              {usuario?.nome}
-            </button>
-            <button onClick={() => logout(null)}>
-              <i className="bi bi-arrow-up-right-circle-fill"></i>
-            </button>
+        <div className="h-100 d-flex align-items-center">
+          <div className="user_info_wrapper flex-fill d-flex">
+            <div className="flex-grow-1 d-flex justify-content-end">
+              <Link to="/meuperfil">
+                <i className="bi bi-person-fill"></i>
+                {usuario?.nome}
+                <i className="bi bi-caret-down ms-2"></i>
+              </Link>
+            </div>
+            <div>
+              <button onClick={() => logout(null)}>
+                <i className="bi bi-box-arrow-in-right"></i>
+              </button>
+            </div>
           </div>
         </div>
       );

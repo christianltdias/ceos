@@ -22,7 +22,6 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log("renderizado");
   }, [logado])
 
   return (

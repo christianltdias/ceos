@@ -7,7 +7,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="home_container">
+    <div className="home_container container-fluid">
       <div className="container home_wrapper">
         <img src={homeImg} alt="Imagem do home" />
         <section>

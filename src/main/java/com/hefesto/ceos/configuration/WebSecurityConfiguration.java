@@ -53,6 +53,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/h2-console/**").permitAll()
             .antMatchers(HttpMethod.POST,"/api/auth/**").permitAll()
+            .antMatchers(HttpMethod.POST,"/api/usuarios/cadastrar").permitAll()
             .anyRequest().authenticated()
             .and().csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

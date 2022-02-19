@@ -29,18 +29,17 @@ const Login = ({ setUsuario, logado }: Props) => {
         setErro(true);
       });
   };
-  console.log("login " + logado);
 
   if (logado) navigate("/", { replace: true });
 
   return (
     <div className="login-pg h-100 d-flex justify-content-center align-items-center">
       <div className="col-6 d-flex flex-column justify-content-center align-items-center login-left-wrapper">
-        <h3>Ceos</h3>
-        <p className="mt-3">Encontre o que você procura aqui</p>
-        <p className="versao">{versao}</p>
-        <Button classExt="mt-5" rounded={true}>
-          <Link to="/signup">Crie sua conta</Link>
+        <h3>Bem vindo ao Ceos</h3>
+        <p className="mt-3">Aulas particulares, curso e dúvidas.</p>
+        <p className="versao">v {versao}</p>
+        <Button classExt="mt-5" rounded={true} onClick={() => navigate("/signup")}>
+          Crie sua conta
         </Button>
       </div>
       <form

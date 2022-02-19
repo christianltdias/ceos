@@ -1,11 +1,12 @@
 package com.hefesto.ceos.form;
-
-import com.hefesto.ceos.model.ClasseUsuario;
 import com.hefesto.ceos.model.Usuario;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Date;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class UsuarioForm {
@@ -20,23 +21,20 @@ public class UsuarioForm {
     private String login;
     @NotBlank @Size(min = 8, max = 20)
     private String senha;
-    @NotBlank @Size(min = 8, max = 20)
-    private String confirmaSenha;
-    @NotBlank
-    private String classeAcesso;
+    @NotNull
+    private Date dataNascimento;
 
     public UsuarioForm() {
     }
 
-    public UsuarioForm(String nome, String sobrenome, String email, String login, String senha, String confirmaSenha,
-                       String classeAcesso) {
+    public UsuarioForm(String nome, String sobrenome, String email, String login, String senha,
+        Date dataNascimento) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
         this.login = login;
         this.senha = senha;
-        this.confirmaSenha = confirmaSenha;
-        this.classeAcesso = classeAcesso;
+        this.dataNascimento = dataNascimento; 
     }
 
     public String getNome() {
@@ -79,32 +77,25 @@ public class UsuarioForm {
         this.senha = senha;
     }
 
-    public String getConfirmaSenha() {
-        return confirmaSenha;
+
+    public Date getDataNascimento() {
+        return this.dataNascimento;
     }
 
-    public void setConfirmaSenha(String confirmaSenha) {
-        this.confirmaSenha = confirmaSenha;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
-    public String getClasseAcesso() {
-        return classeAcesso;
-    }
 
-    public void setClasseAcesso(String classeAcesso) {
-        this.classeAcesso = classeAcesso;
-    }
-
-    public Usuario toUsuario(ClasseUsuario classe) {
+    public Usuario toUsuario() {
         Usuario usuario = new Usuario();
         usuario.setNome(nome);
         usuario.setSobrenome(sobrenome);
         usuario.setLogin(login);
         usuario.setEmail(email);
+        usuario.setDataNascimento(dataNascimento);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         usuario.setSenha(encoder.encode(senha));
-        usuario.setClasseUsuario(classe);
-
         return usuario;
     }
 }

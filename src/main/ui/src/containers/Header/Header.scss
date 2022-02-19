@@ -54,11 +54,14 @@
   color: white;
   padding: 0 20px;
 
-  button {
+  a, button {
     background-color: transparent;
     color: white;
-    font-size: 1rem;
+    font-size: 1.2rem;
     border: none;
+  }
+  .bi-caret-down{
+    font-size: 0.8rem;
   }
 
   i {
