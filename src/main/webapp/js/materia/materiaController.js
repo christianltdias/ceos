@@ -7,6 +7,5 @@ function criarMateria () {
         materiaModal.modal('hide');
         })
     .catch(error => {
-        console.log(error.response)
     })
 }

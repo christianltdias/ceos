@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+$bg-primary: #202020;
+$bg-content: rgb(255, 255, 255);
+$bg-color-primary: rgb(241, 241, 241);
+$bg-contrast-primary: rgb(255, 166, 0);
+$bg-contrast-primary-hv: rgb(255, 201, 102);
+$bg-primary-light: rgb(46, 46, 46);
+
+$color-primary: #43bfc4;
+$color-text-contrast: white;
+
+$font-global: 'Roboto', sans-serif;
+$font-logo: 'Lobster', cursive;
+
+html, body #root, #root>div {
+  height: 100vh;
+  margin: 0;
+  font-family: $font-global;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.text-contrast {
+  color: $bg-contrast-primary-hv;
+}
+
+.text-contrast:hover {
+  color: $bg-contrast-primary;
+}
+
+.link-none{
+  text-decoration: none;
+}
+
+.link-none:hover{
+  color: none;
+}

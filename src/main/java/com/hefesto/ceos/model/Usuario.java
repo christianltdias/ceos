@@ -1,8 +1,8 @@
 package com.hefesto.ceos.model;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -28,10 +28,9 @@ public class Usuario {
     private String email;
     @Column(name = "ATIVO")
     private boolean ativo = true;
-    @Column(name = "DT_CADASTRO")
-    private LocalDateTime dataCadastro;
-    @Column(name = "DT_ATUALIZACAO_SENHA")
-    private LocalDateTime dataAtuSenha;
+    @Column(name = "DATA_NASCIMENTO")
+    private Date dataNascimento;
+
     @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY)
     private List<Licitacao> licitacoes = new ArrayList<>();
     @ManyToMany(mappedBy = "alunos", fetch = FetchType.LAZY)
@@ -41,15 +40,14 @@ public class Usuario {
     }
 
     public Usuario(String nome, String sobrenome, String login, String senha, String email,
-                   boolean ativo, LocalDateTime dataCadastro, LocalDateTime dataAtuSenha) {
+                   boolean ativo, Date dataNascimento) {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
         this.email = email;
         this.ativo = ativo;
-        this.dataCadastro = dataCadastro;
-        this.dataAtuSenha = dataAtuSenha;
         this.sobrenome = sobrenome;
+        this.dataNascimento = dataNascimento;
     }
 
     public Long getId() {
@@ -100,22 +98,6 @@ public class Usuario {
         this.ativo = ativo;
     }
 
-    public LocalDateTime getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(LocalDateTime dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
-    public LocalDateTime getDataAtuSenha() {
-        return dataAtuSenha;
-    }
-
-    public void setDataAtuSenha(LocalDateTime dataAtuSenha) {
-        this.dataAtuSenha = dataAtuSenha;
-    }
-
     public String getSobrenome() {
         return sobrenome;
     }
@@ -131,4 +113,35 @@ public class Usuario {
     public void setClasseUsuario(ClasseUsuario classeUsuario) {
         this.classeUsuario = classeUsuario;
     }
+
+
+    public boolean getAtivo() {
+        return this.ativo;
+    }
+
+
+    public Date getDataNascimento() {
+        return this.dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public List<Licitacao> getLicitacoes() {
+        return this.licitacoes;
+    }
+
+    public void setLicitacoes(List<Licitacao> licitacoes) {
+        this.licitacoes = licitacoes;
+    }
+
+    public List<Licitacao> getMinhasLicitacoes() {
+        return this.minhasLicitacoes;
+    }
+
+    public void setMinhasLicitacoes(List<Licitacao> minhasLicitacoes) {
+        this.minhasLicitacoes = minhasLicitacoes;
+    }
+
 }

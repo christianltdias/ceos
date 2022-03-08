@@ -1,12 +1,15 @@
 package com.hefesto.ceos.model;
 
 import javax.persistence.*;
+
+import org.springframework.security.core.GrantedAuthority;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "PERMISSOES")
-public class Permissao {
+public class Permissao implements GrantedAuthority{
 
     @Id
     @Column(name = "ID_PERMISSAO")
@@ -61,5 +64,10 @@ public class Permissao {
 
     public void setClassesAcesso(List<ClasseUsuario> classesAcesso) {
         this.classesAcesso = classesAcesso;
+    }
+
+    @Override
+    public String getAuthority() {
+        return this.nome;
     }
 }

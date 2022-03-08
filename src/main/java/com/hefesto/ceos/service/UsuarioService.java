@@ -32,4 +32,11 @@ public class UsuarioService {
     public void save(Usuario usuario){
         usuarioRepository.save(usuario);
     }
+
+    public Usuario getById(Long id){
+        Optional<Usuario> optUsuario = usuarioRepository.findById(id);
+        if(optUsuario.isPresent())
+            return optUsuario.get();
+        return null;
+    }
 }

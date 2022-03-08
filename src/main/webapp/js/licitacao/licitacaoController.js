@@ -7,6 +7,5 @@ function criarLicitacao () {
         licitacaoModal.modal('hide');
         })
     .catch(error => {
-        console.log(error.response)
     })
 }

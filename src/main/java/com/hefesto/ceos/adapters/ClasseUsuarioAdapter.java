@@ -1,11 +1,12 @@
 package com.hefesto.ceos.adapters;
 
-import com.google.gson.*;
-import com.hefesto.ceos.model.Categoria;
-import com.hefesto.ceos.model.ClasseUsuario;
-import com.hefesto.ceos.model.Materia;
-
 import java.lang.reflect.Type;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.hefesto.ceos.model.ClasseUsuario;
 
 public class ClasseUsuarioAdapter implements JsonSerializer<ClasseUsuario> {
 

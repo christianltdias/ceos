@@ -1,35 +1,52 @@
-import React, { useState, useEffect } from "react";
-import CategoriaService from "../../services/CategoriaService";
-import Categoria from "../../types/ICategoria"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.scss";
-
-const categoriaService: CategoriaService = new CategoriaService();
+import CategoriasLista from "../../containers/CategoriasLista/CategoriasLista";
+import Login from "../../pages/Login/Login";
+import Header from "../../containers/Header/Header";
+import Footer from "../../containers/Footer/Footer";
+import ProtectedRoute from "../../components/Routes/PrivateRoute/PrivateRoute";
+import useToken from "../../hooks/tokenHook";
+import Home from "../Home/Home";
+import Signup from "../Signup/Signup"
+import NotFound from "../NotFound/NotFound";
+import { useState, useEffect } from "react";
+import Token from "../../types/Token";
 
 const App = () => {
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const {setToken, isAuthenticated} = useToken();
+  const [logado, setLogado] = useState(isAuthenticated());
+
+  const setUsuario = async (token: Token | null) => {
+      await setToken(token);
+      setLogado(isAuthenticated());
+  }
 
   useEffect(() => {
-    categoriaService
-      .buscaTodasCategorias()
-      .then((res) => setCategorias(categorias.concat(res)));
-  }, []);
+  }, [logado])
 
-  
   return (
-    <ul>
-      {categorias && categorias.map(function (d, idx) {
-        return (
-          <li key={idx}>
-            {d.id} - {d.nome} - {d.descricao} - {d.urlImagem}
-            <ul>
-              {d.materias.map(function (m) {
-                return <li key={m}>{m}</li>;
-              })}
-            </ul>
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      <Router>
+        <Header logado={logado} logout={setUsuario}/>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/categorias"
+            element={
+              <ProtectedRoute
+                authenticationPath="/login"
+                isAuthenticated={isAuthenticated()}
+                outlet={<CategoriasLista />}
+              />
+            }
+          />
+          <Route path="/login" element={<Login logado={logado} setUsuario={setUsuario} />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </>
   );
 };
 

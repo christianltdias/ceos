@@ -1,20 +1,70 @@
-@import "../../index.scss";
+@import "../../styles/index.scss";
 
-.header{
-    background-color: $color-primary;
-    padding: 1rem 0 1rem 2rem;
-    margin-bottom: 3rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-};
+.header {
+  background-color: $bg-primary;
+  width: 100%;
+  margin: 0;
+  padding: 0.75rem 2rem 0.75rem 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+  color: white;
 
-.icon{
-    height: 50px;
-    width: 50px;
-    object-fit: fill;
+  a {
+    text-decoration: none;
+  }
 }
-    
 
-    
-   
+.icon {
+  height: 2rem;
+  width: 2rem;
+  object-fit: fill;
+}
+
+.logo_text {
+  font-size: 1.5rem;
+  font-family: $font-logo;
+  color: $bg-color-primary;
+  padding: 0;
+  margin: 0 0 0 1rem;
+}
+
+.user_details {
+  p {
+    font-size: 1rem;
+    color: $bg-contrast-primary;
+  }
+}
+
+.nav-header {
+  a {
+    color: white;
+    font-size: 1rem;
+  }
+  a.active {
+    color: $bg-contrast-primary;
+  }
+  a:hover {
+    color: $bg-contrast-primary-hv;
+  }
+}
+
+.user_info_wrapper {
+  color: white;
+  padding: 0 20px;
+
+  a, button {
+    background-color: transparent;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+  }
+  .bi-caret-down{
+    font-size: 0.8rem;
+  }
+
+  i {
+    margin-right: 1rem;
+  }
+}

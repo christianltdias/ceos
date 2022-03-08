@@ -7,6 +7,5 @@ function criarCategoria () {
         categoriaModal.modal('hide');
         })
     .catch(error => {
-        console.log(error.response)
     })
 }
