@@ -24,7 +24,7 @@ const getValidToken = (): string => {
 };
 
 const instance = axios.create({
-  baseURL: "http://localhost:8080/api/",
+  baseURL: "http://localhost:8080/ceos/api/",
 });
 
 const httpGet = (url: string): Promise<AxiosResponse<any, any>> => {

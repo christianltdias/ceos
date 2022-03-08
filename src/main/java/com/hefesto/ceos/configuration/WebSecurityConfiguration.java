@@ -30,6 +30,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private TokenService tokenService;
 
+    private static final String[] AUTH_WHITELIST = {
+        "/swagger-resources/**",
+        "/swagger-ui.html",
+        "/v2/api-docs",
+        "/webjars/**"
+    };
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -38,7 +45,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/signup/**", "/signin/**");
+        web.ignoring().antMatchers(AUTH_WHITELIST);
     }
 
     @Override
@@ -51,9 +58,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers("/h2-console/**").permitAll()
-            .antMatchers(HttpMethod.POST,"/api/auth/**").permitAll()
-            .antMatchers(HttpMethod.POST,"/api/usuarios/cadastrar").permitAll()
+            .antMatchers("h2-console/**", "/swagger-ui/**").permitAll()
+            .antMatchers(HttpMethod.POST,"ceos/api/auth/authenticate", "ceos/api/usuarios/cadastrar").permitAll()
             .anyRequest().authenticated()
             .and().csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

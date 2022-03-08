@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiResponse;
+
 @RestController()
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AutenticacaoRest {
 
     @Autowired
@@ -28,7 +32,12 @@ public class AutenticacaoRest {
     @Autowired
     private TokenService tokenService;
 
-    @PostMapping
+    @ApiOperation(value = "Autentica o usuário para geração do token")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Usuário autenticado", response = TokenDTO.class),
+        @ApiResponse(code = 403, message = "Usuário não autorizado")
+    })
+    @PostMapping("authenticate")
     public ResponseEntity<?> autenticar(@Valid @RequestBody LoginForm loginForm){
         UsernamePasswordAuthenticationToken dadosLogin = loginForm.converter();
         try {
@@ -37,7 +46,7 @@ public class AutenticacaoRest {
             return ResponseEntity.ok(new TokenDTO(token, "Bearer"));
         }
         catch (AuthenticationException e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
         }
     }
 }

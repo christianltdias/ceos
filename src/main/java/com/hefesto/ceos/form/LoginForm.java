@@ -5,11 +5,15 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class LoginForm {
 
+    @ApiModelProperty(value = "Login do usuário")
     @NotEmpty @NotNull
     private String login;
     @NotEmpty @NotNull
+    @ApiModelProperty(value = "Senha do usuário")
     private String senha;
     
 
