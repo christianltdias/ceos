@@ -9,7 +9,10 @@ jobs:
 
     steps:
       - name: Checkout do repositorio
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with: 
+          fetch-depth: 0
+
 
       
       - name: Configurando ambiente Python 3.9
@@ -30,7 +33,7 @@ jobs:
         run: mvn -B test
 
       - name: Run Diff Cover
-        run: diff-cover target/site/jacoco/jacoco.xml --compare-branch=develop --fail-under=80
+        run: diff-cover target/site/jacoco/jacoco.xml --compare-branch=${{ github.base_ref }} --fail-under=80
 
       - name: Upload JaCoCo coverage report
         uses: actions/upload-artifact@v2
