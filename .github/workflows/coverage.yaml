@@ -30,7 +30,7 @@ jobs:
         run: mvn -B test
 
       - name: Run Diff Cover
-        run: diff-cover target/site/jacoco/jacoco.xml --compare-branch=origin/${{ github.base_ref }} --fail-under=80
+        run: diff-cover target/site/jacoco/jacoco.xml --compare-branch=origin/${{ github.event.pull_request.base.ref }} --fail-under=80
 
       - name: Upload JaCoCo coverage report
         uses: actions/upload-artifact@v2
