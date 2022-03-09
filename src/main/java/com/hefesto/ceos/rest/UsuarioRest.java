@@ -17,6 +17,7 @@ import com.hefesto.ceos.utils.UsuarioUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,5 +68,13 @@ public class UsuarioRest {
         URI uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
         
         return  ResponseEntity.created(uri).body(gson.toJson(usuario));
+    }
+
+    @GetMapping("/{idUsuario}/existe")
+    private ResponseEntity verificaSeUsuarioExiste(@PathVariable Long idUsuario){
+        Usuario usuario = usuarioService.buscaUsuarioPorId(idUsuario);
+        if(usuario != null)
+         return ResponseEntity.ok().build();
+        return ResponseEntity.notFound().build();
     }
 }
