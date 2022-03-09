@@ -14,7 +14,7 @@ jobs:
         with:
           python-version: '3.9'
           cache: 'pip'
-        run: pip install diff_cover
+      - run: pip install diff_cover
 
       - uses: actions/checkout@v2
       - name: Set up the Java JDK
