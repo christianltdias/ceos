@@ -1,4 +1,4 @@
-name: build
+name: coverage
 
 on:
   pull_request:
@@ -6,15 +6,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout do repositorio
         uses: actions/checkout@v3
         with: 
           fetch-depth: 0
 
-
-      
       - name: Configurando ambiente Python 3.9
         uses: actions/setup-python@v2
         with:
@@ -29,12 +26,18 @@ jobs:
           java-version: '8'
           distribution: 'adopt'
 
+  tests:
+    steps:
       - name: Build e test report JaCoCo com Maven
         run: mvn -B test
-
+  
+  diff-report: 
+    steps:
       - name: Run Diff Cover
         run: diff-cover target/site/jacoco/jacoco.xml --compare-branch=origin/${{ github.base_ref }} --fail-under=80
 
+  upload-artifacts: 
+    steps:
       - name: Upload JaCoCo coverage report
         uses: actions/upload-artifact@v2
         with:
