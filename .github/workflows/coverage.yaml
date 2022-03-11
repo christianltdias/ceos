@@ -9,44 +9,47 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Git Checkout
-        description: Checkout do Repositório e Fetch 
         uses: actions/checkout@v3
         with: 
           fetch-depth: 0
+        run: echo "Checkout do Repositório e Fetch"
 
       - name: Configurando ambiente Python 3.9
-        description: Configurando ambiente Python para rodar comandos diff-cover
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
+        run: echo "Configurando ambiente Python para rodar comandos diff-cover"
 
       - name: Instalação do Diff-Cover
-        description: Instalando Diff-cover para retornar percentual de cobertura atual
-        run: pip install diff_cover
+        run: |
+          echo "Instalando Diff-cover para retornar percentual de cobertura atual"
+          pip install diff_cover
 
       - name: Configurando JDK 8
-        description: Configurando o Java JDK 8 para rodar os tests e gerar report
         uses: actions/setup-java@v2
         with:
           java-version: '8'
           distribution: 'adopt'
+        run: echo "Configurando o Java JDK 8 para rodar os tests e gerar report"
 
       - name: Build e test report JaCoCo com Maven
-        description: Roda os testes e gera o report com JaCoCo
-        run: mvn -B test
+        run: |
+          echo "Roda os testes e gera o report com JaCoCo"
+          mvn -B test
   
       - name: Run Diff Cover
-        description: Roda diff-cover com o report gerado anteriormente. Comparação com a branch ${{ github.base_ref }}
-        run: diff-cover target/site/jacoco/jacoco.xml --compare-branch=origin/${{ github.base_ref }} --fail-under=80
+        run: |
+          echo "Roda diff-cover com o report gerado anteriormente. Comparação com a branch ${{ github.base_ref }}"
+          diff-cover target/site/jacoco/jacoco.xml --compare-branch=origin/${{ github.base_ref }} --fail-under=80
 
       - name: Archive code coverage results
-        description: Salva os reports durante um dia
         uses: actions/upload-artifact@v3
         with:
           name: code-coverage-report
           retention-days: 1
           path: |
             target/site/jacoco/jacoco.xml
+        run: echo "Salva os reports durante um dia"
 
           
           
