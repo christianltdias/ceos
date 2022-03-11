@@ -5,6 +5,7 @@ on:
 
 jobs:
   build:
+    name: 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do repositorio
@@ -26,24 +27,12 @@ jobs:
           java-version: '8'
           distribution: 'adopt'
 
-  tests:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Build e test report JaCoCo com Maven
         run: mvn -B test
   
-  diff-report: 
-    runs-on: ubuntu-latest
-    needs: tests
-    steps:
       - name: Run Diff Cover
         run: diff-cover target/site/jacoco/jacoco.xml --compare-branch=origin/${{ github.base_ref }} --fail-under=80
 
-  upload-artifacts: 
-    runs-on: ubuntu-latest
-    needs: diff-report
-    steps:
       - name: Upload JaCoCo coverage report
         uses: actions/upload-artifact@v2
         with:
