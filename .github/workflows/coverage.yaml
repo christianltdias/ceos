@@ -12,13 +12,11 @@ jobs:
         uses: actions/checkout@v3
         with: 
           fetch-depth: 0
-        run: echo "Checkout do Repositório e Fetch"
 
       - name: Configurando ambiente Python 3.9
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
-        run: echo "Configurando ambiente Python para rodar comandos diff-cover"
 
       - name: Instalação do Diff-Cover
         run: |
@@ -30,7 +28,6 @@ jobs:
         with:
           java-version: '8'
           distribution: 'adopt'
-        run: echo "Configurando o Java JDK 8 para rodar os tests e gerar report"
 
       - name: Build e test report JaCoCo com Maven
         run: |
@@ -49,7 +46,6 @@ jobs:
           retention-days: 1
           path: |
             target/site/jacoco/jacoco.xml
-        run: echo "Salva os reports durante um dia"
 
           
           
