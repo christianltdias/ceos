@@ -16,6 +16,7 @@ class CeosApplicationTests {
 	void contextLoads() {
         assertEquals(Classe.ADMINISTRADOR.ordinal(), 0);
         assertEquals(Classe.USUARIO.ordinal(), 1);
+		assertEquals(1 , 0);
 	}
 
 }

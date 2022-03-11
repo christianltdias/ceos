@@ -19,9 +19,7 @@ jobs:
           python-version: '3.9'
 
       - name: Instalação do Diff-Cover
-        run: |
-          echo "Instalando Diff-cover para retornar percentual de cobertura atual"
-          pip install diff_cover
+        run: pip install diff_cover
 
       - name: Configurando JDK 8
         uses: actions/setup-java@v2
@@ -30,9 +28,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build e test report JaCoCo com Maven
-        run: |
-          echo "Roda os testes e gera o report com JaCoCo"
-          mvn -B test
+        run: mvn -B test
   
       - name: Run Diff Cover
         run: |
