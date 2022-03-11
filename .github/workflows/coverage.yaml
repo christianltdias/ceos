@@ -1,11 +1,11 @@
-name: coverage
+name: Cobertura de Código
 
 on:
   pull_request:
 
 jobs:
   build:
-    name: 
+    name: Cobertura de Código
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do repositorio
@@ -33,15 +33,13 @@ jobs:
       - name: Run Diff Cover
         run: diff-cover target/site/jacoco/jacoco.xml --compare-branch=origin/${{ github.base_ref }} --fail-under=80
 
-      - name: Upload JaCoCo coverage report
-        uses: actions/upload-artifact@v2
-        with:
-          name: jacoco-report
-          path: target/site/jacoco/
-
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
         with:
           name: code-coverage-report
-          path: target/site/jacoco/
+          retention-days: 1
+          path: |
+            target/site/jacoco/jacoco.xml
+
+          
           
