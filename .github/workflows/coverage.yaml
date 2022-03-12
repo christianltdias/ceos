@@ -34,7 +34,7 @@ jobs:
           name: jacoco-reports
           retention-days: 1
           path: |
-            target/site/jacoco/jacoco.xml
+            target/site/jacoco/
             !target/site/jacoco/**/*.csv
             !target/site/jacoco/**/*.xml
 
@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v3
         with: 
           fetch-depth: 0
-          
+
       - name: Configurando ambiente Python 3.9
         uses: actions/setup-python@v2
         with:
