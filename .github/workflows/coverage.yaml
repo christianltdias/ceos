@@ -5,21 +5,13 @@ on:
 
 jobs:
   build:
-    name: Cobertura de Código
+    name: Build e Testes
     runs-on: ubuntu-latest
     steps:
       - name: Git Checkout
         uses: actions/checkout@v3
         with: 
           fetch-depth: 0
-
-      - name: Configurando ambiente Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-
-      - name: Instalação do Diff-Cover
-        run: pip install diff_cover
 
       - name: Configurando JDK 8
         uses: actions/setup-java@v2
@@ -30,18 +22,47 @@ jobs:
       - name: Build e test report JaCoCo com Maven
         run: mvn -B test
   
-      - name: Run Diff Cover
-        run: |
-          echo "Roda diff-cover com o report gerado anteriormente. Comparação com a branch ${{ github.base_ref }}"
-          diff-cover target/site/jacoco/jacoco.xml --compare-branch=origin/${{ github.base_ref }} --fail-under=80
-
-      - name: Archive code coverage results
+      - name: Archive xml result
         uses: actions/upload-artifact@v3
         with:
-          name: code-coverage-report
+          name: jacoco-xml
+          if-no-files-found: error
+          retention-days: 1
+          path: target/site/jacoco/jacoco.xml
+
+      - name: Archive test reports results
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco-reports
           retention-days: 1
           path: |
             target/site/jacoco/jacoco.xml
+            !target/site/jacoco/**/*.csv
+            !target/site/jacoco/**/*.xml
+
+  coverage:
+    name: Cobertura de Testes
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configurando ambiente Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Instalação do Diff-Cover
+        run: pip install diff_cover
+
+      - name: Download do xml
+        uses: actions/download-artifact@v3
+        with:
+          name: jacoco-xml
+
+      - name: Run Diff Cover
+        run: |
+          echo "Roda diff-cover com o report gerado anteriormente. Comparação com a branch ${{ github.base_ref }}"
+          diff-cover jacoco.xml --compare-branch=origin/${{ github.base_ref }} --fail-under=80
+
 
           
           
