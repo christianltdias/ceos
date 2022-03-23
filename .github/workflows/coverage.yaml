@@ -64,8 +64,16 @@ jobs:
       - name: Run Diff Cover
         run: |
           echo "Roda diff-cover com o report gerado anteriormente. Comparação com a branch ${{ github.base_ref }}"
-          diff-cover jacoco.xml --compare-branch=origin/${{ github.base_ref }} --fail-under=80
+          diff-cover jacoco.xml --compare-branch=origin/${{ github.base_ref }} --fail-under=80 > diff-cover-report.txt
+          cat ./diff-cover-report.txt
 
+      - name: Archive diff-cover result
+        uses: actions/upload-artifact@v3
+        with:
+          name: diff-cover-report
+          if-no-files-found: error
+          retention-days: 1
+          path: diff-cover-report.txt
 
           
           
